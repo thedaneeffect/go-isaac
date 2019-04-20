@@ -140,6 +140,13 @@ func (r *ISAAC) randInit(flag bool) {
 	r.randcnt = 256 /* reset the counter for the first set of results */
 }
 
+func (r *ISAAC) SeedInt32(keys []int32) {
+	for i := 0; i < len(keys); i++ {
+		r.randrsl[i] = uint32(keys[i])
+	}
+	r.randInit(true)
+}
+
 /* there is no official method for doing this
  * the challenge code just memcpys the string to the top of the output array
  * and this is the best equivalent I could come up with in Go */
